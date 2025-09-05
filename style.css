@@ -1,0 +1,60 @@
+body{
+    margin:auto;
+    text-align: center;
+}
+
+
+h1, h2{
+    text-align: center;
+    padding-left: 2rem;
+}
+
+.outer-box{
+    height: 400px;
+    width: 400px;
+    /* border: 2px solid black; */
+    margin: auto;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.boxes{
+    height: 150px;
+    width: 150px;
+    border: 0.5rem solid black;
+    margin: auto;
+    border-radius: 20%;
+}
+
+.box1{
+    background-color: #c1121f;
+}
+
+.box2{
+    background-color: #47c78db6;
+}
+
+.box3{
+    background-color: #a980e7;
+}
+
+.box4{
+    background-color: #d4a373;
+}
+
+.flash{
+    background-color: black;
+}
+.userFlash{
+    background-color: #38CF38;
+}
+
+.redBlink{
+    color: red;
+}
+
+.over{
+    background-color: red;
+}
