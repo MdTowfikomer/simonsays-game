@@ -1,20 +1,32 @@
 let btnsClass = ["box1", "box2", "box3", "box4"];
 let body = document.querySelector('body');
+let heading = document.querySelector('h2'); //class id elementname
+let strBtn = document.querySelector(".start");
 let gameStart = false;
+let gameSeq = [];
+let userSeq = [];
 let level = 0;
+
+
+if (window.matchMedia("(max-width: 768px)").matches) {
+        strBtn.style.display = "inline"; // visible on medium screens
+        
+        heading.innerText = "Click on start button to begin the game!";
+    } else {
+        strBtn.style.display = "none";   // hidden on small/large screens
+    }
 
 document.addEventListener("keypress", function(){ //event,callback
     if(gameStart == false){
         console.log("game started..!");
         gameStart = true;
+        levelUp(); // function for flashing random box
     }
 
-    levelUp(); // function for flashing random box
 });
 
 // starting by using button
 
-let strBtn = document.querySelector(".start");
 
 strBtn.addEventListener("click", function(){ //event,callback
     if(gameStart == false){
@@ -22,6 +34,7 @@ strBtn.addEventListener("click", function(){ //event,callback
         gameStart = true;
     }
     strBtn.style.display = "none";
+    
     levelUp(); // function for flashing random box
 });
 
@@ -32,7 +45,7 @@ function gameFlash(btn){
     btn.classList.add("flash");
     setTimeout(function(){
         btn.classList.remove("flash");
-    }, 550);
+    }, 650);
 }
 
 function userFlash(btn){
@@ -50,11 +63,9 @@ function overBackground(btn){
 }
 
 
-let heading = document.querySelector('h2'); //class id elementname
 
-let gameSeq = [];
-let userSeq = [];
 let para = document.createElement('h3');
+
 para.style.margin = "0px";
 para.style.textAlign = "center";
 
@@ -66,9 +77,11 @@ function levelUp(){
     
 if (level === 1) {
   para.innerText = "Click the flashed button…!";
+  para.style.color = "white";
 } 
 else if (level === 2) {
-  para.innerText = "Repeat the pattern from start…";
+  para.innerText = 'Repeat the pattern from "The START"';
+  para.style.color = "white";
   // blink red 3 times
   let count = 0;
   const blinkId = setInterval(() => {
@@ -81,14 +94,16 @@ else if (level === 2) {
   }, 200);
 } 
 else if (level === 3) {
-  para.style.color = "black";
   para.innerText = "Nice, you're doing good!";
+  para.style.color = "white";
 } 
 else if (level > 4 && level % 2 === 0) {
   para.innerText = "Keep going…!";
+  para.style.color = "white";
 } 
 else {
   para.innerText = "Nice, let's go…!";
+  para.style.color = "white";
 }
 
 
@@ -108,8 +123,9 @@ function check(idx){
            setTimeout(levelUp(), 1500);
        } 
     } else{
-        heading.innerText = "GAME OVER! press any key to restart";
-        heading.style.color = "black";
+        // heading.innerHTML = "GAME OVER! your score :press any key to restart";
+        heading.innerHTML = `GAME OVER ! Your Score:${level-1} <br> Press any key to start`;
+        heading.style.color = "white";
         para.innerHTML = "";
 
         overBackground(body);
@@ -140,11 +156,19 @@ function restart(){
     level = 0;
     gameSeq = [];
     userSeq = [];
-    heading.style.color = "black";
+    heading.style.color = "white";
     
      if (window.matchMedia("(max-width: 768px)").matches) {
         strBtn.style.display = "inline"; // visible on medium screens
-    } else {
+        heading.style.color = "white";
+        // heading.innerText = "Click on start button to begin the game!";
+        // if(level == 1) {
+        //     heading.innerHTML = `GAME OVER ! Your Score:${level} <br> Press any key to start`;
+        // } 
+            if(level > 1){
+                heading.innerHTML = `GAME OVER ! Your Score:${level+1} <br> Click on start button to restart`;
+            }
+        } else {
         strBtn.style.display = "none";   // hidden on small/large screens
     }
 }
