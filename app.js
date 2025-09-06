@@ -83,9 +83,9 @@ else if (level === 2) {
   para.innerText = 'Repeat the pattern from "The START"';
   para.style.color = "white";
   // blink red 3 times
-  let count = 0;
-  const blinkId = setInterval(() => {
-    para.classList.toggle("redBlink");
+    let count = 0;
+    const blinkId = setInterval(() => {
+    para.classList.add("redBlink");
     count++;
     if (count > 10) {         // toggle 6 times (~3 blinks)
       clearInterval(blinkId);
@@ -162,13 +162,24 @@ function restart(){
         strBtn.style.display = "inline"; // visible on medium screens
         heading.style.color = "white";
         // heading.innerText = "Click on start button to begin the game!";
-        // if(level == 1) {
-        //     heading.innerHTML = `GAME OVER ! Your Score:${level} <br> Press any key to start`;
-        // } 
+            if(level == 1) {
+                heading.innerHTML = `GAME OVER ! Your Score:0 <br> Click on start button to restart`;
+            } 
             if(level > 1){
                 heading.innerHTML = `GAME OVER ! Your Score:${level+1} <br> Click on start button to restart`;
             }
         } else {
         strBtn.style.display = "none";   // hidden on small/large screens
-    }
+        }
 }
+
+let modal = document.querySelector(".modal");
+let modalBtn = document.querySelector("#closeModal");
+
+window.addEventListener("load", ()=>{
+    modal.style.display = "flex";
+})
+
+modalBtn.addEventListener("click", ()=>{
+    modal.style.display = "none";
+})
