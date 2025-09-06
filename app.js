@@ -12,11 +12,27 @@ document.addEventListener("keypress", function(){ //event,callback
     levelUp(); // function for flashing random box
 });
 
+// starting by using button
+
+let strBtn = document.querySelector(".start");
+
+strBtn.addEventListener("click", function(){ //event,callback
+    if(gameStart == false){
+        console.log("game started..!");
+        gameStart = true;
+    }
+    strBtn.style.display = "none";
+    levelUp(); // function for flashing random box
+});
+
+
+
+
 function gameFlash(btn){
     btn.classList.add("flash");
     setTimeout(function(){
         btn.classList.remove("flash");
-    }, 250);
+    }, 550);
 }
 
 function userFlash(btn){
@@ -40,6 +56,8 @@ let gameSeq = [];
 let userSeq = [];
 let para = document.createElement('h3');
 para.style.margin = "0px";
+para.style.textAlign = "center";
+
 heading.insertAdjacentElement("afterend", para);  
 
 function levelUp(){
@@ -75,7 +93,7 @@ else {
 
 
     heading.innerText = `level ${level}`;
-    let ranIdx = Math.floor(Math.random() * 2);
+    let ranIdx = Math.floor(Math.random() * btnsClass.length);
     let ranBoxClass = btnsClass[ranIdx];
     gameSeq.push(ranBoxClass);
     console.log(gameSeq);
@@ -123,4 +141,10 @@ function restart(){
     gameSeq = [];
     userSeq = [];
     heading.style.color = "black";
+    
+     if (window.matchMedia("(max-width: 768px)").matches) {
+        strBtn.style.display = "inline"; // visible on medium screens
+    } else {
+        strBtn.style.display = "none";   // hidden on small/large screens
+    }
 }
